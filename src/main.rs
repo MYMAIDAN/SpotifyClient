@@ -1,6 +1,36 @@
 use oauth2::{Client, Token, StandardToken, State, Url};
 use oauth2_examples::{config_from_args, listen_for_code};
 use reqwest::header::{HeaderName,HeaderValue,ACCEPT,CONTENT_TYPE};
+use serde::{Deserialize, Serialize};
+
+#[derive(Deserialize)]
+#[derive(Debug)]
+struct ExternalUrls
+{
+    spotify : String
+}
+
+#[derive(Deserialize)]
+#[derive(Debug)]
+struct Followers{
+    href : Option<String>,
+    total: u8
+}
+
+#[derive(Deserialize)]
+#[derive(Debug)]
+struct Config {
+    display_name: String,
+    email: String,
+    external_urls : ExternalUrls,
+    followers: Followers,
+    href : Option<String>,
+    id: String,
+    images: Vec<Option<String>>,
+    r#type: Option<String>,
+    uri: String,
+}
+
 
 
 #[tokio::main]
@@ -44,8 +74,14 @@ async fn main() -> anyhow::Result<()> {
     .send()
     .await?;
 
+
+
     println!("Status Code: {}", response.status().as_str());
-    println!("Full response test: {:?}", response.text().await?);
+    //println!("Full response test: {:?}", response.text().await?);
+    let config = response.json::<Config>().await?;
+
+    println!("Json {:?}", config);
+    
 
 
     Ok(())
