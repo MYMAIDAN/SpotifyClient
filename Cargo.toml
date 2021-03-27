@@ -10,7 +10,7 @@ edition = "2018"
 name = "oauth2_examples"
 
 [dependencies]
-reqwest = "0.11.0"
+reqwest = { version = "0.11.0", features = ["json"] }
 tokio = { version = "1.0.2", features = ["full"] }
 hyper = { version = "0.14.2", features = ["server", "http1"] }
 serde = { version = "1.0.119", features = ["derive"] }
