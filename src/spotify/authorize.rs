@@ -16,7 +16,7 @@ impl fmt::Display for SpotifyToken {
     }
 }
 
-pub async fn get_auto_token(client_id: String, client_secret: String) -> Result<SpotifyToken, String> 
+pub async fn get_auth_token(client_id: String, client_secret: String) -> Result<SpotifyToken, String> 
 {
     let received_client = reqwest::Client::new();
     let auth_url = Url::parse(AUTH_URL).unwrap();
