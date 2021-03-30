@@ -44,3 +44,17 @@ pub struct UserProfile
     r#type: Option<String>,
     uri: String,
 }
+
+#[derive(Deserialize)]
+#[derive(Debug)]
+pub struct Error {
+    status : u32,
+    message : String,
+}
+
+#[derive(Deserialize)]
+#[derive(Debug)]
+pub enum ResponseValue {
+    value (UserProfile),
+    error (Error)
+}

@@ -33,7 +33,7 @@ impl ClientApi {
         Ok(user_profile)
     }
 
-    pub async fn get_user_profile(&self, user_id : &str) -> Result<UserProfile>
+    pub async fn get_user_profile(&self, user_id : &str) -> Result<ResponseValue>
     {
         let mut user_profile_url = String::from(GET_USER_PROFILE);
         user_profile_url.push_str(user_id);
@@ -45,12 +45,7 @@ impl ClientApi {
                                                .send()
                                                .await?;
         
-        let user_profile = response.json::<UserProfile>().await;
-
-        match user_profile
-        {
-            Err(e) => Err(e),
-            Ok(user_profile) => Ok(user_profile),
-        }
+        let res = response.json::<ResponseValue>().await?;
+        Ok(res)
     }
 }
