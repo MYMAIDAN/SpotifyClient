@@ -19,7 +19,7 @@ impl ClientApi {
         }
     }
 
-    pub async fn get_current_user_profile(self) -> Result<UserProfile> 
+    pub async fn get_current_user_profile(&self) -> Result<CurrentUserProfile> 
     {   
         let response  = self.client.get(GET_CURRENT_USER_PROFILE)
                                                 .bearer_auth(self.token.to_string())
@@ -29,7 +29,28 @@ impl ClientApi {
                                                 .await?;
 
 
-        let user_profile = response.json::<UserProfile>().await?;
+        let user_profile = response.json::<CurrentUserProfile>().await?;
         Ok(user_profile)
+    }
+
+    pub async fn get_user_profile(&self, user_id : &str) -> Result<UserProfile>
+    {
+        let mut user_profile_url = String::from(GET_USER_PROFILE);
+        user_profile_url.push_str(user_id);
+
+        let response = self.client.get(user_profile_url)
+                                               .bearer_auth(self.token.to_string())
+                                               .header(ACCEPT, HeaderValue::from_bytes(b"application/json").unwrap())
+                                               .header(CONTENT_TYPE, HeaderValue::from_bytes(b"application/json").unwrap())
+                                               .send()
+                                               .await?;
+        
+        let user_profile = response.json::<UserProfile>().await;
+
+        match user_profile
+        {
+            Err(e) => Err(e),
+            Ok(user_profile) => Ok(user_profile),
+        }
     }
 }

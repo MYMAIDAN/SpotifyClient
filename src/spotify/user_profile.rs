@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 pub const GET_CURRENT_USER_PROFILE: &str = "https://api.spotify.com/v1/me";
+pub const GET_USER_PROFILE: &str = "https://api.spotify.com/v1/users/";
 
 #[derive(Deserialize)]
 #[derive(Debug)]
@@ -18,10 +19,24 @@ struct Followers{
 
 #[derive(Deserialize)]
 #[derive(Debug)]
-pub struct UserProfile {
+pub struct CurrentUserProfile {
     display_name: String,
     email: String,
     external_urls : ExternalUrls,
+    followers: Followers,
+    href : Option<String>,
+    id: String,
+    images: Vec<Option<String>>,
+    r#type: Option<String>,
+    uri: String,
+}
+
+#[derive(Deserialize)]
+#[derive(Debug)]
+pub struct UserProfile
+{
+    display_name: String,
+    external_urls: ExternalUrls,
     followers: Followers,
     href : Option<String>,
     id: String,
