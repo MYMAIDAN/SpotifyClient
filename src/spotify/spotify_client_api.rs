@@ -13,7 +13,8 @@ impl ClientApi {
     pub async fn new(client_id : String, client_secret : String) ->Result<ClientApi> {
         let token  = get_auth_token(client_id, client_secret).await;
         let reqwest_client = reqwest::Client::new();
-        match token{
+        match token
+        {
             Ok(to) => Ok(ClientApi{token : to, client : reqwest_client}),
             Err(e) => panic!("Cannot authorize"),
         }
