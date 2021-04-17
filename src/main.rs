@@ -21,9 +21,10 @@ async fn main() -> anyhow::Result<()> {
 
     println!("Json {:?}", config);
 
-    let user = spotify_cliet.get_user_profile("sdvdfqwe123`12").await?;
+    //let user = spotify_cliet.get_user_profile("sdvdfqwe123`12").await?;
 
-    println!("User Profile {:?}", user);
+    let album = spotify_cliet.get_current_users_saved_albums(1,0,"").await?;
+    println!("User Profile {:?}", album);
 
     Ok(())
 }

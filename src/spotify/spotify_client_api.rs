@@ -3,6 +3,7 @@ use reqwest::*;
 use reqwest::header::{HeaderName,HeaderValue,ACCEPT,CONTENT_TYPE};
 use super::authorize::*;
 use super::user_profile::*;
+use super::album::*;
 
 pub struct ClientApi {
     token : SpotifyToken,
@@ -34,7 +35,7 @@ impl ClientApi {
         Ok(user_profile)
     }
 
-    pub async fn get_user_profile(&self, user_id : &str) -> Result<ResponseValue>
+    pub async fn get_user_profile(&self, user_id : &str) -> Result<ResponseValue<UserProfile>>
     {
         let mut user_profile_url = String::from(GET_USER_PROFILE);
         user_profile_url.push_str(user_id);
@@ -46,23 +47,19 @@ impl ClientApi {
                                                .send()
                                                .await?;
         
-        let res = response.json::<ResponseValue>().await?;
+        let res = response.json::<ResponseValue<UserProfile>>().await?;
         Ok(res)
     }
 
-    pub async fn get_current_users_saved_albums(&self, limit: u32, offset: usize, market : &str) -> Result<ResponseValue>
+    pub async fn get_current_users_saved_albums(&self, limit: u32, offset: usize, market : &str) -> Result<ResponseValue<Album>>
     {
         let mut url = String::from(GET_CURRENT_USERS_SAVED_ALBUMS);
 
-        if limit > 0 || offset > 0 || market.as_bytes().len() > 0 
-        {
-            url.push_str("?");
-        } 
+        url.push_str("?");
 
-        if limit > 0 
-        {
-            url.push_str(&limit.to_string());
-        }
+        url.push_str("limit=1");
+
+        println!("USER URL {:?}", url);
 
         let response = self.client.get(url)
                                                .bearer_auth(self.token.to_string())
@@ -71,7 +68,8 @@ impl ClientApi {
                                                .send()
                                                .await?;
 
-        let res = response.json::<ResponseValue>().await?;
+        println!("Json {:?}",response);
+        let res = response.json::<ResponseValue<Album>>().await?;
         Ok(res)
     }
 }

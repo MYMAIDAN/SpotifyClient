@@ -25,6 +25,13 @@ pub async fn get_auth_token(client_id: String, client_secret: String) -> Result<
     let mut client = Client::new(client_id, auth_url, token_url);
     client.set_client_secret(client_secret);
     client.add_scope("user-read-email");
+    client.add_scope("playlist-modify");
+    client.add_scope("user-read-private");
+    client.add_scope("playlist-read-private");
+    client.add_scope("user-library-modify");
+    client.add_scope("user-library-read");
+
+
     client.set_redirect_url(redirect_url);
 
     let state = State::new_random();

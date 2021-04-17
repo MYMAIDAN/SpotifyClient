@@ -55,7 +55,7 @@ pub struct Error {
 
 #[derive(Deserialize)]
 #[derive(Debug)]
-pub enum ResponseValue {
-    value (UserProfile),
+pub enum ResponseValue<T> {
+    value (T),
     error (Error)
 }
