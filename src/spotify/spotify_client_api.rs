@@ -49,4 +49,29 @@ impl ClientApi {
         let res = response.json::<ResponseValue>().await?;
         Ok(res)
     }
+
+    pub async fn get_current_users_saved_albums(&self, limit: u32, offset: usize, market : &str) -> Result<ResponseValue>
+    {
+        let mut url = String::from(GET_CURRENT_USERS_SAVED_ALBUMS);
+
+        if limit > 0 || offset > 0 || market.as_bytes().len() > 0 
+        {
+            url.push_str("?");
+        } 
+
+        if limit > 0 
+        {
+            url.push_str(&limit.to_string());
+        }
+
+        let response = self.client.get(url)
+                                               .bearer_auth(self.token.to_string())
+                                               .header(ACCEPT, HeaderValue::from_bytes(b"application/json").unwrap())
+                                               .header(CONTENT_TYPE, HeaderValue::from_bytes(b"application/json").unwrap())
+                                               .send()
+                                               .await?;
+
+        let res = response.json::<ResponseValue>().await?;
+        Ok(res)
+    }
 }

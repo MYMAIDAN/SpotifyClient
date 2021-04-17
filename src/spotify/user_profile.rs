@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 
 pub const GET_CURRENT_USER_PROFILE: &str = "https://api.spotify.com/v1/me";
 pub const GET_USER_PROFILE: &str = "https://api.spotify.com/v1/users/";
+pub const GET_CURRENT_USERS_SAVED_ALBUMS : &str = "https://api.spotify.com/v1/me/albums";
 
 #[derive(Deserialize)]
 #[derive(Debug)]
