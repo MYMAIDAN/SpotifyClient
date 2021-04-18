@@ -26,14 +26,14 @@ pub struct Artist
 pub struct Copyrights
 {
     text : String,
-    r#type : u8,
+    r#type : String,
 }
 
 #[derive(Deserialize)]
 #[derive(Debug)]
 pub struct ExternalIds
 {
-    ups : String,
+    upc : String,
 }
 
 #[derive(Deserialize)]
@@ -90,10 +90,11 @@ pub struct AlbumRef
     id : String,
     images: Vec<Image>,
     name : String,
-    populatiry : u32,
-    release_data : String,
-    release_data_precision : String,
-    tracks : Vec<Track>,
+    popularity : u32,
+    release_date : String,
+    release_date_precision : String,
+    total_tracks : u32,
+    tracks : Track,
     r#type : String,
     uri : Option<String>,
 }

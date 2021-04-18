@@ -51,7 +51,7 @@ impl ClientApi {
         Ok(res)
     }
 
-    pub async fn get_current_users_saved_albums(&self, limit: u32, offset: usize, market : &str) -> Result<ResponseValue<Album>>
+    pub async fn get_current_users_saved_albums(&self, limit: u32, offset: usize, market : &str) -> Result<Album>
     {
         let mut url = String::from(GET_CURRENT_USERS_SAVED_ALBUMS);
 
@@ -68,8 +68,9 @@ impl ClientApi {
                                                .send()
                                                .await?;
 
-        println!("Json {:?}",response);
-        let res = response.json::<ResponseValue<Album>>().await?;
+        //println!("Json {:?}",response);
+        let res = response.json::<Album>().await?;
+        //Ok(Album{})
         Ok(res)
     }
 }
