@@ -4,6 +4,7 @@ use reqwest::header::{HeaderName,HeaderValue,ACCEPT,CONTENT_TYPE};
 use super::authorize::*;
 use super::user_profile::*;
 use super::album::*;
+use super::user_top_artist_track::*;
 
 pub struct ClientApi {
     token : SpotifyToken,
@@ -70,6 +71,31 @@ impl ClientApi {
 
         //println!("Json {:?}",response);
         let res = response.json::<Album>().await?;
+        //Ok(Album{})
+        Ok(res)
+    }
+
+    pub async fn get_current_user_top_artist(&self, time_range : &str, limit : u32, offset : u32) ->Result<UserTopArtistAndTraks>
+    {
+        let mut url = String::from(GET_CURRENT_USER_TOP_ARTIST_AND_TRAKS);
+
+        url.push_str("artists");
+
+        url.push_str("?");
+
+        url.push_str("limit=1");
+
+        println!("USER URL {:?}", url);
+
+        let response = self.client.get(url)
+                                               .bearer_auth(self.token.to_string())
+                                               .header(ACCEPT, HeaderValue::from_bytes(b"application/json").unwrap())
+                                               .header(CONTENT_TYPE, HeaderValue::from_bytes(b"application/json").unwrap())
+                                               .send()
+                                               .await?;
+
+        println!("Json {:?}",response);
+        let res = response.json::<UserTopArtistAndTraks>().await?;
         //Ok(Album{})
         Ok(res)
     }

@@ -30,6 +30,7 @@ pub async fn get_auth_token(client_id: String, client_secret: String) -> Result<
     client.add_scope("playlist-read-private");
     client.add_scope("user-library-modify");
     client.add_scope("user-library-read");
+    client.add_scope("user-top-read");
 
 
     client.set_redirect_url(redirect_url);
