@@ -1,13 +1,13 @@
 use super::user_profile::*;
 use serde::{Deserialize, Serialize};
-
 #[derive(Deserialize, Debug)]
-pub struct ExternalUrls {
+pub struct ExternalUrls
+{
     spotify: String,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct Artist {
+pub struct Artist
+{
     external_urls: ExternalUrls,
     href: Option<String>,
     id: String,
@@ -15,27 +15,27 @@ pub struct Artist {
     r#type: String,
     uri: Option<String>,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct Copyrights {
+pub struct Copyrights
+{
     text: String,
     r#type: String,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct ExternalIds {
+pub struct ExternalIds
+{
     upc: String,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct Image {
+pub struct Image
+{
     height: u32,
     url: Option<String>,
     width: u32,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct TrackItem {
+pub struct TrackItem
+{
     artists: Vec<Artist>,
     available_markets: Vec<String>,
     disc_number: u32,
@@ -50,9 +50,9 @@ pub struct TrackItem {
     r#type: String,
     uri: Option<String>,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct Track {
+pub struct Track
+{
     href: Option<String>,
     items: Vec<TrackItem>,
     limit: u32,
@@ -61,9 +61,9 @@ pub struct Track {
     previous: Option<String>,
     total: u32,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct AlbumRef {
+pub struct AlbumRef
+{
     album_type: String,
     artists: Vec<Artist>,
     available_markets: Vec<String>,
@@ -83,15 +83,15 @@ pub struct AlbumRef {
     r#type: String,
     uri: Option<String>,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct Item {
+pub struct Item
+{
     added_at: String,
     album: AlbumRef,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct Album {
+pub struct Album
+{
     href: Option<String>,
     items: Vec<Item>,
     limit: u32,
@@ -100,9 +100,9 @@ pub struct Album {
     previous: Option<String>,
     total: u32,
 }
-
 #[derive(Deserialize, Debug)]
-pub enum ResponseValue {
+pub enum ResponseValue
+{
     value(Album),
     error(Error),
 }

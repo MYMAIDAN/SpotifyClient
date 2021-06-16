@@ -1,26 +1,26 @@
 use super::user_profile::*;
 use serde::{Deserialize, Serialize};
-
 #[derive(Deserialize, Debug)]
-pub struct ExternalUrls {
+pub struct ExternalUrls
+{
     spotify: String,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct Followers {
+pub struct Followers
+{
     href: Option<String>,
     total: u32,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct Images {
+pub struct Images
+{
     height: u32,
     url: Option<String>,
     width: u32,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct Items {
+pub struct Items
+{
     external_urls: ExternalUrls,
     followers: Followers,
     genres: Vec<String>,
@@ -31,9 +31,9 @@ pub struct Items {
     popularity: u32,
     uri: Option<String>,
 }
-
 #[derive(Deserialize, Debug)]
-pub struct UserTopArtistAndTraks {
+pub struct UserTopArtistAndTraks
+{
     items: Vec<Items>,
     next: Option<String>,
     previous: Option<String>,

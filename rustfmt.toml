@@ -1,0 +1,60 @@
+# ----------------------------------------------------------------------------------
+#                      r u s t f m t   -   C O N F I G
+# ==================================================================================
+# 
+# Version: 0.7.1
+# Author : Mykhailo Maidan <mykhailo.maidan@gmail.com>
+# 
+# A predefined .rustfmt.toml file with all configuration options and their
+# associated description, possible values and default values for use in other
+# projects.
+# 
+# This should actually automatically be shipped with cargo fmt or rustfmt itself!
+# ----------------------------------------------------------------------------------
+
+# Use verbose output.
+# Default: false
+#   verbose = 
+
+# Do not reformat out of line modules.
+# Default: false
+#   skip_children = 
+
+# Lines to format; this is not supported in rustfmt.toml,
+# and can only be specified via the --file-lines option.
+#   file_lines = 
+
+# Maximum width of each line.
+# Default: 100
+# max_width = 80 
+
+# Ideal width of each line.
+# Default: 80
+max_width = 100 
+
+# Number of spaces per tab.
+# Default: 4
+tab_spaces = 4 
+
+array_width=100
+attr_fn_like_width=100
+binop_separator="Back"
+blank_lines_lower_bound=0
+blank_lines_upper_bound=0
+brace_style="AlwaysNextLine"
+chain_width=60
+color="Auto"
+combine_control_expr=true
+comment_width=80
+condense_wildcard_suffixes=true
+control_brace_style="ClosingNextLine"
+edition="2021"
+empty_item_single_line=true
+enum_discrim_align_threshold=10
+error_on_line_overflow=true
+fn_args_layout="Tall"
+fn_call_width=80
+fn_single_line=false
+imports_layout="HorizontalVertical"
+indent_style="Visual"
+
