@@ -1,5 +1,5 @@
-mod authorize;
-mod user_profile;
 mod album;
-mod user_top_artist_track;
+mod authorize;
 pub mod spotify_client_api;
+mod user_profile;
+mod user_top_artist_track;

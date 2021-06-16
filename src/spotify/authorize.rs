@@ -1,12 +1,12 @@
-use oauth2::{Client, Token, StandardToken, State, Url};
+use oauth2::{Client, StandardToken, State, Token, Url};
 use oauth2_examples::{config_from_args, listen_for_code};
-use reqwest::header::{HeaderName,HeaderValue,ACCEPT,CONTENT_TYPE};
+use reqwest::header::{HeaderName, HeaderValue, ACCEPT, CONTENT_TYPE};
 use serde::{Deserialize, Serialize};
 use std::fmt;
 
-const AUTH_URL : &str = "https://accounts.spotify.com/authorize";
-const TOKEN_URL : &str = "https://accounts.spotify.com/api/token";
-const REDIRECT_URL : &str = "http://localhost:8080/api/auth/redirect";
+const AUTH_URL: &str = "https://accounts.spotify.com/authorize";
+const TOKEN_URL: &str = "https://accounts.spotify.com/api/token";
+const REDIRECT_URL: &str = "http://localhost:8080/api/auth/redirect";
 
 pub struct SpotifyToken(String);
 
@@ -16,8 +16,10 @@ impl fmt::Display for SpotifyToken {
     }
 }
 
-pub async fn get_auth_token(client_id: String, client_secret: String) -> Result<SpotifyToken, String> 
-{
+pub async fn get_auth_token(
+    client_id: String,
+    client_secret: String,
+) -> Result<SpotifyToken, String> {
     let received_client = reqwest::Client::new();
     let auth_url = Url::parse(AUTH_URL).unwrap();
     let token_url = Url::parse(TOKEN_URL).unwrap();
@@ -32,7 +34,6 @@ pub async fn get_auth_token(client_id: String, client_secret: String) -> Result<
     client.add_scope("user-library-read");
     client.add_scope("user-top-read");
 
-
     client.set_redirect_url(redirect_url);
 
     let state = State::new_random();
@@ -42,12 +43,12 @@ pub async fn get_auth_token(client_id: String, client_secret: String) -> Result<
 
     let received = listen_for_code(8080).await.unwrap();
 
-    let token = client.exchange_code(received.code)
-                      .with_client(&received_client)
-                      .execute::<StandardToken>()
-                      .await.unwrap();
+    let token = client
+        .exchange_code(received.code)
+        .with_client(&received_client)
+        .execute::<StandardToken>()
+        .await
+        .unwrap();
 
-    Ok(SpotifyToken(token.access_token().to_string()))                 
+    Ok(SpotifyToken(token.access_token().to_string()))
 }
-
-
