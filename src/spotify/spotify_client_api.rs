@@ -12,6 +12,18 @@ pub struct ClientApi
 }
 impl ClientApi
 {
+    async fn get(&self, url: &str) -> Result<reqwest::Response>
+    {
+               println!("URL {:?}", url);
+        self.client
+            .get(url)
+            .bearer_auth(self.token.to_string())
+            .header(ACCEPT, HeaderValue::from_bytes(b"application/json").unwrap())
+            .header(CONTENT_TYPE, HeaderValue::from_bytes(b"application/json").unwrap())
+            .send()
+            .await
+    }
+
     pub async fn new(client_id: String, client_secret: String) -> Result<ClientApi>
     {
         let token = get_auth_token(client_id, client_secret).await;
@@ -24,14 +36,10 @@ impl ClientApi
     }
     pub async fn get_current_user_profile(&self) -> Result<CurrentUserProfile>
     {
-        let response =
-            self.client
-                .get(GET_CURRENT_USER_PROFILE)
-                .bearer_auth(self.token.to_string())
-                .header(ACCEPT, HeaderValue::from_bytes(b"application/json").unwrap())
-                .header(CONTENT_TYPE, HeaderValue::from_bytes(b"application/json").unwrap())
-                .send()
-                .await?;
+        let response = ClientApi::get(self,GET_CURRENT_USER_PROFILE).await?;
+
+        println!("USER URL {:?}", response);
+        
         let user_profile = response.json::<CurrentUserProfile>().await?;
         Ok(user_profile)
     }
@@ -39,14 +47,8 @@ impl ClientApi
     {
         let mut user_profile_url = String::from(GET_USER_PROFILE);
         user_profile_url.push_str(user_id);
-        let response =
-            self.client
-                .get(user_profile_url)
-                .bearer_auth(self.token.to_string())
-                .header(ACCEPT, HeaderValue::from_bytes(b"application/json").unwrap())
-                .header(CONTENT_TYPE, HeaderValue::from_bytes(b"application/json").unwrap())
-                .send()
-                .await?;
+        let response = ClientApi::get(self, &user_profile_url ).await?;
+
         let res = response.json::<ResponseValue<UserProfile>>().await?;
         Ok(res)
     }
@@ -60,14 +62,8 @@ impl ClientApi
         url.push_str("?");
         url.push_str("limit=1");
         println!("USER URL {:?}", url);
-        let response =
-            self.client
-                .get(url)
-                .bearer_auth(self.token.to_string())
-                .header(ACCEPT, HeaderValue::from_bytes(b"application/json").unwrap())
-                .header(CONTENT_TYPE, HeaderValue::from_bytes(b"application/json").unwrap())
-                .send()
-                .await?;
+        let response = ClientApi::get(self, &url ).await?;
+
         //println!("Json {:?}",response);
         let res = response.json::<Album>().await?;
         //Ok(Album{})
@@ -84,14 +80,8 @@ impl ClientApi
         url.push_str("?");
         url.push_str("limit=1");
         println!("USER URL {:?}", url);
-        let response =
-            self.client
-                .get(url)
-                .bearer_auth(self.token.to_string())
-                .header(ACCEPT, HeaderValue::from_bytes(b"application/json").unwrap())
-                .header(CONTENT_TYPE, HeaderValue::from_bytes(b"application/json").unwrap())
-                .send()
-                .await?;
+        let response = ClientApi::get(self, &url ).await?;
+
         println!("Json {:?}", response);
         let res = response.json::<UserTopArtistAndTraks>().await?;
         Ok(res)
@@ -107,16 +97,12 @@ impl ClientApi
         url.push_str("?");
         url.push_str("limit=1");
         println!("USER URL {:?}", url);
-        let response =
-            self.client
-                .get(url)
-                .bearer_auth(self.token.to_string())
-                .header(ACCEPT, HeaderValue::from_bytes(b"application/json").unwrap())
-                .header(CONTENT_TYPE, HeaderValue::from_bytes(b"application/json").unwrap())
-                .send()
-                .await?;
+        let response = ClientApi::get(self, &url).await?;
+
         println!("Json {:?}", response);
         let res = response.json::<UserTopArtistAndTraks>().await?;
         Ok(res)
     }
+
+
 }

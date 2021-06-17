@@ -100,9 +100,3 @@ pub struct Album
     previous: Option<String>,
     total: u32,
 }
-#[derive(Deserialize, Debug)]
-pub enum ResponseValue
-{
-    value(Album),
-    error(Error),
-}
