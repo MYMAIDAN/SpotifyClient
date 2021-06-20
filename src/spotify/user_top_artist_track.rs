@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use super::user_profile::*;
+use super::common_structs::*;
 
 
 #[derive(Deserialize)]

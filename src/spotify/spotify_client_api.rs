@@ -4,6 +4,7 @@ use super::user_profile::*;
 use super::user_top_artist_track::*;
 use hyper::header::ACCEPT_ENCODING;
 use reqwest::header::{HeaderName, HeaderValue, ACCEPT, CONTENT_TYPE};
+use super::common_structs::*;
 use reqwest::*;
 pub struct ClientApi
 {
