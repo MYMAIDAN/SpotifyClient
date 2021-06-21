@@ -5,13 +5,6 @@ use super::common_structs::*;
 
 #[derive(Deserialize)]
 #[derive(Debug)]
-pub struct ExternalUrls
-{
-    spotify : String,
-}
-
-#[derive(Deserialize)]
-#[derive(Debug)]
 pub struct Followers
 {
     href : Option<String>,
@@ -27,7 +20,7 @@ pub struct Items
     genres : Vec<String>,
     href : Option<String>,
     id : String,
-    images : Vec<Images>,
+    images : Vec<Image>,
     name : String,
     popularity : u32,
     uri : Option<String>

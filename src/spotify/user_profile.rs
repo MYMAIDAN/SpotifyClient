@@ -1,13 +1,10 @@
 use serde::{Deserialize, Serialize};
+use super::common_structs::*;
 pub const GET_CURRENT_USER_PROFILE: &str = "https://api.spotify.com/v1/me";
 pub const GET_USER_PROFILE: &str = "https://api.spotify.com/v1/users/";
 pub const GET_CURRENT_USERS_SAVED_ALBUMS: &str = "https://api.spotify.com/v1/me/albums";
 pub const GET_CURRENT_USER_TOP_ARTIST_AND_TRAKS: &str = "https://api.spotify.com/v1/me/top/";
-#[derive(Deserialize, Debug)]
-struct ExternalUrls
-{
-    spotify: String,
-}
+
 #[derive(Deserialize, Debug)]
 struct Followers
 {

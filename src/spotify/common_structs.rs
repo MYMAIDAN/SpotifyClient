@@ -15,9 +15,15 @@ pub enum ResponseValue<T>
 }
 
 #[derive(Deserialize,Debug)]
-pub struct Images 
+pub struct Image 
 {
     height : u32,
     url : Option<String>,
     width : u32
+}
+
+#[derive(Deserialize, Debug)]
+pub struct ExternalUrls
+{
+    spotify : String,
 }

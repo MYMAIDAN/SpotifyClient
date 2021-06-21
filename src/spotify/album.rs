@@ -1,10 +1,7 @@
 use super::user_profile::*;
 use serde::{Deserialize, Serialize};
-#[derive(Deserialize, Debug)]
-pub struct ExternalUrls
-{
-    spotify: String,
-}
+use super::common_structs::*;
+
 #[derive(Deserialize, Debug)]
 pub struct Artist
 {
@@ -26,13 +23,7 @@ pub struct ExternalIds
 {
     upc: String,
 }
-#[derive(Deserialize, Debug)]
-pub struct Image
-{
-    height: u32,
-    url: Option<String>,
-    width: u32,
-}
+
 #[derive(Deserialize, Debug)]
 pub struct TrackItem
 {
