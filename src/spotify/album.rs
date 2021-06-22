@@ -3,16 +3,6 @@ use serde::{Deserialize, Serialize};
 use super::common_structs::*;
 
 #[derive(Deserialize, Debug)]
-pub struct Artist
-{
-    external_urls: ExternalUrls,
-    href: Option<String>,
-    id: String,
-    name: String,
-    r#type: String,
-    uri: Option<String>,
-}
-#[derive(Deserialize, Debug)]
 pub struct Copyrights
 {
     text: String,
@@ -24,23 +14,7 @@ pub struct ExternalIds
     upc: String,
 }
 
-#[derive(Deserialize, Debug)]
-pub struct TrackItem
-{
-    artists: Vec<Artist>,
-    available_markets: Vec<String>,
-    disc_number: u32,
-    duration_ms: u64,
-    explicit: bool,
-    external_urls: ExternalUrls,
-    href: Option<String>,
-    id: String,
-    name: String,
-    preview_url: String,
-    track_number: u32,
-    r#type: String,
-    uri: Option<String>,
-}
+
 #[derive(Deserialize, Debug)]
 pub struct Track
 {
