@@ -22,6 +22,12 @@ pub struct Image
     width : u32
 }
 
+#[derive(Deserialize,Debug)]
+pub struct ExternalIds 
+{
+    isrc : String
+}
+
 #[derive(Deserialize, Debug)]
 pub struct ExternalUrls
 {
