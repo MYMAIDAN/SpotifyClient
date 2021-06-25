@@ -7,6 +7,7 @@ use reqwest::header::{HeaderName, HeaderValue, ACCEPT, CONTENT_TYPE};
 use super::common_structs::*;
 use super::track::{Track};
 use reqwest::*;
+use super::api_url_defines::*;
 pub struct ClientApi
 {
     token: SpotifyToken,
