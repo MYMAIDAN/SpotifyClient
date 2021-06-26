@@ -5,7 +5,7 @@ use super::user_top_artist_track::*;
 use hyper::header::ACCEPT_ENCODING;
 use reqwest::header::{HeaderName, HeaderValue, ACCEPT, CONTENT_TYPE};
 use super::common_structs::*;
-use super::track::{Track};
+use super::track::{Track, LocalTrack, GlobalTrack};
 use reqwest::*;
 use super::api_url_defines::*;
 pub struct ClientApi
@@ -107,17 +107,33 @@ impl ClientApi
         Ok(res)
     }
 
-    pub async fn get_track(&self, id : &str, market : &str ) -> Result<Track>
+    pub async fn get_track(&self, id : &str, market : Option<&str>) -> Result<Track> 
     {
         let mut url = String::from(GET_TRACK_BY_ID);
         url.push_str(id);
+
+        if market.is_some()
+        {
+            url.push_str("?market=");
+            url.push_str(market.unwrap());
+        }
 
         println!("USER URL {:?}", url);
         let response = ClientApi::get(self, &url).await?;
 
         println!("Json {:?}", response);
-        let res = response.json::<Track>().await?;
-        Ok(res)
+        if market.is_some() 
+        {
+            let res = response.json::<LocalTrack>().await?;
+            Ok(Track::eLocal(res))
+        }
+        else
+        {
+            let res = response.json::<GlobalTrack>().await?;
+            Ok(Track::eGlobal(res))
+        }
+
+
     }
 
 

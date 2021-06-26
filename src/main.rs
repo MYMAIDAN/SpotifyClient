@@ -22,7 +22,7 @@ async fn main() -> anyhow::Result<()>
     let top = spotify_cliet.get_current_user_top_artist("", 0, 1).await?;
     println!("Top {:?}", top);
 
-    let track  = spotify_cliet.get_track("11dFghVXANMlKmJXsNCbNl","").await?;
+    let track  = spotify_cliet.get_track("11dFghVXANMlKmJXsNCbNl",Some("EU")).await?;
     println!("Track {:?}", track);
     Ok(())
 }
