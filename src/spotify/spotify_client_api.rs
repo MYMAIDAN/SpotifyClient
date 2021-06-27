@@ -132,8 +132,6 @@ impl ClientApi
             let res = response.json::<GlobalTrack>().await?;
             Ok(Track::eGlobal(res))
         }
-
-
     }
 
 

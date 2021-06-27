@@ -2,7 +2,26 @@ use serde::{Deserialize, Serialize};
 use super::common_structs::*;
 
 #[derive(Deserialize, Debug)]
-pub struct TrackAlbum
+pub struct LocalTrackAlbum
+{
+    album_type : String,
+    artists : Vec<Artist>,
+    //available_markets : Vec<String>,
+    external_urls : ExternalUrls,
+    href : Option<String>,
+    id : String,
+    images : Vec<Image>,
+    name : String,
+    release_date : String,
+    release_date_precision : String,
+    total_tracks : u32,
+    r#type : String,
+    uri: Option<String>,
+
+}
+
+#[derive(Deserialize, Debug)]
+pub struct GlobalTrackAlbum
 {
     album_type : String,
     artists : Vec<Artist>,
@@ -34,7 +53,7 @@ pub struct LinkedFrom
 #[derive(Deserialize, Debug)]
 pub struct GlobalTrack
 {
-    album : TrackAlbum,
+    album : GlobalTrackAlbum,
     artists : Vec<Artist>,
     disc_number : u32,
     duration_ms: u32,
@@ -57,7 +76,7 @@ pub struct GlobalTrack
 #[derive(Deserialize, Debug)]
 pub struct LocalTrack
 {
-    album : TrackAlbum,
+    album : LocalTrackAlbum,
     artists : Vec<Artist>,
     disc_number : u32,
     duration_ms: u32,
