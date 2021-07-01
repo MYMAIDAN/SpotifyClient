@@ -57,14 +57,24 @@ impl ClientApi
     }
     pub async fn get_current_users_saved_albums(&self,
                                                 limit: u32,
-                                                offset: usize,
-                                                market: &str)
+                                                offset: u32,
+                                                market: Option<&str>)
                                                 -> Result<Album>
     {
         let mut url = String::from(GET_CURRENT_USERS_SAVED_ALBUMS);
         url.push_str("?");
-        url.push_str("limit=1");
+        url.push_str("limit=");
+        url.push_str(&limit.to_string());
+        url.push_str("&offset=");
+        url.push_str(&offset.to_string());
+
+        if market.is_some()
+        {
+            url.push_str("&market=");
+            url.push_str(market.unwrap());
+        }
         println!("USER URL {:?}", url);
+
         let response = ClientApi::get(self, &url ).await?;
 
         //println!("Json {:?}",response);

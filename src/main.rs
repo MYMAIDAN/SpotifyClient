@@ -16,7 +16,7 @@ async fn main() -> anyhow::Result<()>
     let config = spotify_cliet.get_current_user_profile().await?;
     println!("Json {:?}", config);
     //let user = spotify_cliet.get_user_profile("sdvdfqwe123`12").await?;
-    let album = spotify_cliet.get_current_users_saved_albums(1, 0, "")
+    let album = spotify_cliet.get_current_users_saved_albums(1, 0, None)
                              .await?;
     println!("User Profile {:?}", album);
     let top = spotify_cliet.get_current_user_top_artist("", 0, 1).await?;
