@@ -88,18 +88,14 @@ impl ClientApi
                                              offset: u32)
                                              -> Result<UserTopArtistAndTraks>
     {
-        let mut url = String::from(GET_CURRENT_USER_TOP_ARTIST_AND_TRAKS);
-        url.push_str("artists");
-        url.push_str("?");
-        url.push_str("limit=");
-        url.push_str(&limit.to_string());
-        url.push_str("&offset=");
-        url.push_str(&offset.to_string());
+        let mut url = format!("{}artists?limit={}&offset={}",GET_CURRENT_USER_TOP_ARTIST_AND_TRAKS,
+                                                             &limit.to_string(),
+                                                             &offset.to_string());
         if time_range.is_some()
         {
-            url.push_str("&time_range=");
-            url.push_str(time_range.unwrap());
+            url.push_str(&format!("&time_range={}",time_range.unwrap()));
         }
+
         println!("USER URL {:?}", url);
         let response = ClientApi::get(self, &url ).await?;
 
