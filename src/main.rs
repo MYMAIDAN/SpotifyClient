@@ -19,7 +19,7 @@ async fn main() -> anyhow::Result<()>
     let album = spotify_cliet.get_current_users_saved_albums(1, 0, None)
                              .await?;
     println!("User Profile {:?}", album);
-    let top = spotify_cliet.get_current_user_top_artist("", 0, 1).await?;
+    let top = spotify_cliet.get_current_user_top_artist(None, 0, 1).await?;
     println!("Top {:?}", top);
 
     let track  = spotify_cliet.get_track("11dFghVXANMlKmJXsNCbNl",Some("ES")).await?;

@@ -83,7 +83,7 @@ impl ClientApi
         Ok(res)
     }
     pub async fn get_current_user_top_artist(&self,
-                                             time_range: &str,
+                                             time_range: Option<&str>,
                                              limit: u32,
                                              offset: u32)
                                              -> Result<UserTopArtistAndTraks>
@@ -91,7 +91,15 @@ impl ClientApi
         let mut url = String::from(GET_CURRENT_USER_TOP_ARTIST_AND_TRAKS);
         url.push_str("artists");
         url.push_str("?");
-        url.push_str("limit=1");
+        url.push_str("limit=");
+        url.push_str(&limit.to_string());
+        url.push_str("&offset=");
+        url.push_str(&offset.to_string());
+        if time_range.is_some()
+        {
+            url.push_str("&time_range=");
+            url.push_str(time_range.unwrap());
+        }
         println!("USER URL {:?}", url);
         let response = ClientApi::get(self, &url ).await?;
 
