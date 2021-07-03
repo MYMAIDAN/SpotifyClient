@@ -62,17 +62,16 @@ impl ClientApi
                                                 -> Result<Album>
     {
         let mut url = String::from(GET_CURRENT_USERS_SAVED_ALBUMS);
-        url.push_str("?");
-        url.push_str("limit=");
-        url.push_str(&limit.to_string());
-        url.push_str("&offset=");
-        url.push_str(&offset.to_string());
 
+
+        let mut url = format!("{}?limit={}&offset={}",GET_CURRENT_USERS_SAVED_ALBUMS,
+                                                             &limit.to_string(),
+                                                             &offset.to_string());
         if market.is_some()
         {
-            url.push_str("&market=");
-            url.push_str(market.unwrap());
+            url.push_str(&format!("&market={}",market.unwrap()));
         }
+
         println!("USER URL {:?}", url);
 
         let response = ClientApi::get(self, &url ).await?;
