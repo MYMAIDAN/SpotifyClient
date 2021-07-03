@@ -61,8 +61,6 @@ impl ClientApi
                                                 market: Option<&str>)
                                                 -> Result<Album>
     {
-        let mut url = String::from(GET_CURRENT_USERS_SAVED_ALBUMS);
-
 
         let mut url = format!("{}?limit={}&offset={}",GET_CURRENT_USERS_SAVED_ALBUMS,
                                                              &limit.to_string(),
@@ -108,15 +106,15 @@ impl ClientApi
                                             offset: u32)
                                             -> Result<UserTopArtistAndTraks>
     {
-        let mut url = String::from(GET_CURRENT_USER_TOP_ARTIST_AND_TRAKS);
-        url.push_str("tracks");
-        url.push_str("?");
-        url.push_str("limit=1");
+        let mut url = format!("{}?limit={}&offset={}",GET_CURRENT_USER_TOP_ARTIST_AND_TRAKS,
+                                                      &limit.to_string(),
+                                                      &offset.to_string());
+        
         if time_range.is_some()
         {
-            url.push_str("&time_range=");
-            url.push_str(time_range.unwrap());
+            url.push_str(&format!("&time_range={}",time_range.unwrap()));
         }
+
         println!("USER URL {:?}", url);
         let response = ClientApi::get(self, &url).await?;
 
@@ -127,13 +125,11 @@ impl ClientApi
 
     pub async fn get_track(&self, id : &str, market : Option<&str>) -> Result<Track> 
     {
-        let mut url = String::from(GET_TRACK_BY_ID);
-        url.push_str(id);
+        let mut url = format!("{}{}",GET_TRACK_BY_ID,id);
 
         if market.is_some()
         {
-            url.push_str("?market=");
-            url.push_str(market.unwrap());
+            url.push_str(&format!("?market={}",market.unwrap()));
         }
 
         println!("USER URL {:?}", url);
