@@ -63,8 +63,8 @@ impl ClientApi
     {
 
         let mut url = format!("{}?limit={}&offset={}",GET_CURRENT_USERS_SAVED_ALBUMS,
-                                                             &limit.to_string(),
-                                                             &offset.to_string());
+                                                      &limit.to_string(),
+                                                      &offset.to_string());
         if market.is_some()
         {
             url.push_str(&format!("&market={}",market.unwrap()));
@@ -73,10 +73,7 @@ impl ClientApi
         println!("USER URL {:?}", url);
 
         let response = ClientApi::get(self, &url ).await?;
-
-        //println!("Json {:?}",response);
         let res = response.json::<Album>().await?;
-        //Ok(Album{})
         Ok(res)
     }
     pub async fn get_current_user_top_artist(&self,

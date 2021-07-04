@@ -40,37 +40,36 @@ pub struct GlobalTrackAlbum
 }
 
 #[derive(Deserialize, Debug)]
-
 pub struct LinkedFrom 
 {
     external_urls : ExternalUrls,
-    href : Option<String>,
-    id : Option<String>,
-    r#type: String,
-    uri : Option<String>
+    href          : Option<String>,
+    id            : Option<String>,
+    r#type        : String,
+    uri           : Option<String>
 }
 
 #[derive(Deserialize, Debug)]
 pub struct GlobalTrack
 {
-    album : GlobalTrackAlbum,
-    artists : Vec<Artist>,
-    disc_number : u32,
-    duration_ms: u32,
-    explicit : bool,
-    external_ids : ExternalIds,
-    external_urls: ExternalUrls,
-    href : Option<String>,
-    id: Option<String>,
-    is_local : bool,
+    album         : GlobalTrackAlbum,
+    artists       : Vec<Artist>,
+    disc_number   : u32,
+    duration_ms   : u32,
+    explicit      : bool,
+    external_ids  : ExternalIds,
+    external_urls : ExternalUrls,
+    href          : Option<String>,
+    id            : Option<String>,
+    is_local      : bool,
     //is_playable : bool,
     //linked_from  : LinkedFrom,
-    name : String,
-    popularity : u32,
-    preview_url : Option<String>,
-    track_number : u32,
-    r#type : String,
-    uri : Option<String>
+    name          : String,
+    popularity    : u32,
+    preview_url   : Option<String>,
+    track_number  : u32,
+    r#type        : String,
+    uri           : Option<String>
 }
 
 #[derive(Deserialize, Debug)]
