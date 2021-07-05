@@ -75,24 +75,24 @@ pub struct GlobalTrack
 #[derive(Deserialize, Debug)]
 pub struct LocalTrack
 {
-    album : LocalTrackAlbum,
-    artists : Vec<Artist>,
-    disc_number : u32,
-    duration_ms: u32,
-    explicit : bool,
-    external_ids : ExternalIds,
-    external_urls: ExternalUrls,
-    href : Option<String>,
-    id: Option<String>,
-    is_local : bool,
-    is_playable : bool,
-    linked_from  : LinkedFrom,
-    name : String,
-    popularity : u32,
-    preview_url : Option<String>,
-    track_number : u32,
-    r#type : String,
-    uri : Option<String>
+    album         : LocalTrackAlbum,
+    artists       : Vec<Artist>,
+    disc_number   : u32,
+    duration_ms   : u32,
+    explicit      : bool,
+    external_ids  : ExternalIds,
+    external_urls : ExternalUrls,
+    href          : Option<String>,
+    id            : Option<String>,
+    is_local      : bool,
+    is_playable   : bool,
+    linked_from   : LinkedFrom,
+    name          : String,
+    popularity    : u32,
+    preview_url   : Option<String>,
+    track_number  : u32,
+    r#type        : String,
+    uri           : Option<String>
 }
 
 #[derive(Deserialize, Debug)]
