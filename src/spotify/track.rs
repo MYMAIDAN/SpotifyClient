@@ -23,19 +23,19 @@ pub struct LocalTrackAlbum
 #[derive(Deserialize, Debug)]
 pub struct GlobalTrackAlbum
 {
-    album_type : String,
-    artists : Vec<Artist>,
-    available_markets : Vec<String>,
-    external_urls : ExternalUrls,
-    href : Option<String>,
-    id : String,
-    images : Vec<Image>,
-    name : String,
-    release_date : String,
+    album_type             : String,
+    artists                : Vec<Artist>,
+    available_markets      : Vec<String>,
+    external_urls          : ExternalUrls,
+    href                   : Option<String>,
+    id                     : String,
+    images                 : Vec<Image>,
+    name                   : String,
+    release_date           : String,
     release_date_precision : String,
-    total_tracks : u32,
-    r#type : String,
-    uri: Option<String>,
+    total_tracks           : u32,
+    r#type                 : String,
+    uri                    : Option<String>,
 
 }
 
