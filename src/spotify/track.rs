@@ -45,7 +45,7 @@ pub struct GlobalTrackAlbum
     uri                    : Option<String>,
 }
 
-/// Struct for link resource from outside
+/// Struct
 #[derive(Deserialize, Debug)]
 pub struct LinkedFrom 
 {
@@ -108,4 +108,12 @@ pub struct LocalTrack
     track_number  : u32,
     r#type        : String,
     uri           : Option<String>
+}
+
+///! Enum for json deserialize method
+#[derive(Deserialize, Debug)]
+pub enum Track
+{
+    eGlobal(GlobalTrack),
+    eLocal(LocalTrack),
 }
