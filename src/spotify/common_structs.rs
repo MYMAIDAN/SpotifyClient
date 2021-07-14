@@ -7,6 +7,10 @@ pub struct Error
     message: String,
 }
 
+
+///! General enum using by json parser to parse to possible response
+///! - T - correct response  type( usualy structure which should be deserialize)
+///! Error - error response from server
 #[derive(Deserialize, Debug)]
 pub enum ResponseValue<T>
 {
@@ -14,6 +18,7 @@ pub enum ResponseValue<T>
     error(Error),
 }
 
+///! Reflect image
 #[derive(Deserialize,Debug)]
 pub struct Image 
 {
